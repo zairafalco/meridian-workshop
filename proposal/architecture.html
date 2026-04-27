@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meridian Workshop - Architecture Overview</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 2rem; line-height: 1.6; color: #0f172a; background: #f8fafc; }
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1.375rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+    p, li { font-size: 1rem; color: #334155; }
+    code, pre { background: #e2e8f0; padding: 0.2rem 0.4rem; border-radius: 6px; font-family: Consolas, monospace; }
+    .section { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08); margin-bottom: 1.5rem; }
+    .note { background: #eef2ff; border-left: 4px solid #6366f1; padding: 1rem; margin-top: 1rem; border-radius: 12px; }
+    .diagram { margin-top: 1rem; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'base', securityLevel: 'strict' });</script>
+</head>
+<body>
+  <header>
+    <h1>R4 Architecture Documentation</h1>
+    <p>Current-state architecture overview for Meridian Components' inventory management dashboard.</p>
+  </header>
+
+  <section class="section">
+    <h2>System Overview</h2>
+    <p>This application is a two-tier, single-page dashboard built with a Vue 3 frontend and a Python FastAPI backend. The frontend is responsible for UI rendering, filter management, and API integration, while the backend exposes REST endpoints that read mock JSON data from the repository.</p>
+    <div class="diagram">
+      <div class="mermaid">
+        flowchart LR
+          Browser[Browser / Operator UI]
+          Frontend[Vue 3 Frontend<br/>client/]
+          Backend[FastAPI Backend<br/>server/]
+          Data[Mock JSON Data<br/>server/data/*.json]
+          Browser --> Frontend
+          Frontend -->|HTTP requests| Backend
+          Backend -->|Reads data| Data
+          Frontend -->|Dev server| Vite["Vite dev server"]
+          Backend -->|App server| Uvicorn["Uvicorn runtime"]
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Frontend Architecture</h2>
+    <ul>
+      <li><strong>Framework:</strong> Vue 3 with Composition API.</li>
+      <li><strong>Build tool:</strong> Vite via <code>client/package.json</code> and <code>npm run dev</code>.</li>
+      <li><strong>Entry point:</strong> <code>client/src/main.js</code> bootstraps the app and mounts <code>App.vue</code>.</li>
+      <li><strong>Views:</strong> <code>client/src/views/</code> contains the main pages, including <code>Reports.vue</code>, <code>Dashboard.vue</code>, and inventory/order views.</li>
+      <li><strong>Components:</strong> reusable UI pieces live in <code>client/src/components/</code>, such as filter controls, modals, and navigation elements.</li>
+    </ul>
+    <p>The frontend uses <code>axios</code> to call backend APIs at <code>http://localhost:8001/api</code> and a shared composable in <code>client/src/composables/useFilters.js</code> to keep filter state consistent across views.</p>
+  </section>
+
+  <section class="section">
+    <h2>Backend Architecture</h2>
+    <ul>
+      <li><strong>Framework:</strong> FastAPI with Pydantic models.</li>
+      <li><strong>Runtime:</strong> Uvicorn, started by <code>python -m uvicorn main:app --reload --host 0.0.0.0 --port 8001</code>.</li>
+      <li><strong>Application file:</strong> <code>server/main.py</code> defines REST endpoints and common filter helpers.</li>
+      <li><strong>Data models:</strong> Pydantic classes such as <code>InventoryItem</code>, <code>Order</code>, and <code>DemandForecast</code> validate API responses.</li>
+      <li><strong>CORS:</strong> configured to allow cross-origin access from the frontend development host.</li>
+    </ul>
+    <p>The backend currently implements endpoints for inventory, orders, demand, backlog, summary dashboards, spending, and reports. The report endpoints now support shared filter parameters to match the UI filter controls.</p>
+  </section>
+
+  <section class="section">
+    <h2>Data Flow & Storage</h2>
+    <ul>
+      <li><strong>Data source:</strong> JSON files in <code>server/data/</code> provide the current dataset.</li>
+      <li><strong>Read-only:</strong> the system is currently read-only for production workflows; no database or persistence layer is included in scope.</li>
+      <li><strong>API aggregation:</strong> backend endpoints aggregate and transform the JSON data for dashboard and report views.</li>
+      <li><strong>Front-end filtering:</strong> filters are passed from the shared UI state to backend endpoints via query parameters.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Deployment & Startup</h2>
+    <ul>
+      <li><strong>Backend startup:</strong> <code>cd server</code> and run <code>python -m uvicorn main:app --reload --host 0.0.0.0 --port 8001</code>.</li>
+      <li><strong>Frontend startup:</strong> <code>cd client</code> and run <code>npm install</code>, then <code>npm run dev</code>.</li>
+      <li><strong>Default ports:</strong> frontend on <code>3000</code> (or another free port if 3000 is occupied), backend on <code>8001</code>.</li>
+      <li><strong>Dependencies:</strong> Node packages in <code>client/package.json</code> and Python dependencies in <code>server/requirements.txt</code>.</li>
+    </ul>
+    <div class="note">
+      <strong>Note:</strong> The current architecture is optimized for quick local development and review. For production deployment, a containerized or cloud-hosted model with a database backend would be the next recommended evolution.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Handoff Summary</h2>
+    <p>This document describes the current-state architecture with the existing Vue 3 frontend, FastAPI backend, and JSON-based data layer. It is suitable for Meridian IT to understand the application shape, developer workflow, and where to extend the system.</p>
+    <p>Key extension points for future work:</p>
+    <ol>
+      <li>Replace JSON data with a relational or NoSQL database for persistence.</li>
+      <li>Add authentication/authorization to API routes.</li>
+      <li>Move frontend and backend into a CI/CD pipeline with automated tests per R3.</li>
+    </ol>
+  </section>
+</body>
+</html>

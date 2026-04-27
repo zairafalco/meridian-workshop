@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Components - Inventory Dashboard Modernization</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            background: white;
+            position: relative;
+        }
+        .slide:not(:first-child) {
+            display: none;
+        }
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .content {
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        .title-slide h1 {
+            color: white;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #34495e;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .feature {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            width: 100%;
+        }
+        .phase {
+            flex: 1;
+            padding: 1rem;
+            background: #e8f4fd;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .phase.active {
+            background: #667eea;
+            color: white;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover {
+            background: #5a6fd8;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            width: 100%;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide title-slide" data-slide="1">
+        <div class="content">
+            <h1>Modernizing Meridian's<br>Inventory Dashboard</h1>
+            <h2>Reliable Operations Across Global Warehouses</h2>
+            <p>Delivering the Complete Solution Your Team Needs</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">6</div>
+                    <div>Weeks to Delivery</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$89.5K</div>
+                    <div>Fixed Investment</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div>Core Requirements</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: The Challenge -->
+    <div class="slide" data-slide="2">
+        <div class="content">
+            <h1>The Challenge</h1>
+            <h2>Incomplete System Holding Back Operations</h2>
+            <p>Your current dashboard serves three global warehouses but struggles with:</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Reports Module Defects</h3>
+                    <p>8+ known issues affecting filter behavior and data consistency</p>
+                </div>
+                <div class="feature">
+                    <h3>Missing Intelligence</h3>
+                    <p>No automated restocking recommendations despite demand forecasting data</p>
+                </div>
+                <div class="feature">
+                    <h3>IT Bottleneck</h3>
+                    <p>Zero automated testing prevents safe system evolution</p>
+                </div>
+                <div class="feature">
+                    <h3>Global Operations Gap</h3>
+                    <p>Tokyo team working in English-only interface</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Our Approach -->
+    <div class="slide" data-slide="3">
+        <div class="content">
+            <h1>Our Approach</h1>
+            <h2>Operations-First, Quality-Driven Delivery</h2>
+            <p>We prioritize what matters to your warehouse teams while building sustainable foundations:</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Fix What's Broken</h3>
+                    <p>Complete remediation of Reports module defects with comprehensive testing</p>
+                </div>
+                <div class="feature">
+                    <h3>Deliver Intelligence</h3>
+                    <p>Smart restocking recommendations based on inventory, demand, and budget constraints</p>
+                </div>
+                <div class="feature">
+                    <h3>Enable Evolution</h3>
+                    <p>Automated testing infrastructure so IT can approve future changes confidently</p>
+                </div>
+                <div class="feature">
+                    <h3>Global Readiness</h3>
+                    <p>Full internationalization and modern UI aligned with current standards</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Technical Solution -->
+    <div class="slide" data-slide="4">
+        <div class="content">
+            <h1>Technical Solution</h1>
+            <h2>Building on Your Existing Investment</h2>
+            <p>Leveraging your Vue.js + Python FastAPI foundation with modern enhancements:</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Smart Algorithms</h3>
+                    <p>Restocking recommendations using demand forecasting and budget optimization</p>
+                </div>
+                <div class="feature">
+                    <h3>Quality Assurance</h3>
+                    <p>Playwright-powered end-to-end testing covering all critical user flows</p>
+                </div>
+                <div class="feature">
+                    <h3>Modern UX</h3>
+                    <p>Material Design 3 interface with dark mode for warehouse environments</p>
+                </div>
+                <div class="feature">
+                    <h3>Complete Documentation</h3>
+                    <p>Interactive architecture overview for seamless IT handover</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Timeline -->
+    <div class="slide" data-slide="5">
+        <div class="content">
+            <h1>Delivery Timeline</h1>
+            <h2>6 Weeks to Full Value</h2>
+            <p>Phased delivery with weekly quality gates and incremental value delivery:</p>
+            <div class="timeline">
+                <div class="phase">
+                    <h3>Week 1</h3>
+                    <p>Assessment & Foundation</p>
+                    <small>Environment setup, defect audit, testing infrastructure</small>
+                </div>
+                <div class="phase">
+                    <h3>Weeks 2-4</h3>
+                    <p>Core Delivery</p>
+                    <small>Reports fixes, restocking feature, test automation</small>
+                </div>
+                <div class="phase">
+                    <h3>Weeks 5-6</h3>
+                    <p>Enhancement & Handoff</p>
+                    <small>UI refresh, i18n, documentation, deployment</small>
+                </div>
+            </div>
+            <p style="margin-top: 2rem;">Weekly demos ensure alignment with your team's needs</p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Why Choose Us -->
+    <div class="slide" data-slide="6">
+        <div class="content">
+            <h1>Why Choose Us</h1>
+            <h2>Proven Track Record in Operations Technology</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Operations Focus</h3>
+                    <p>Deep experience with warehouse and inventory systems across global operations</p>
+                </div>
+                <div class="feature">
+                    <h3>Quality Obsessed</h3>
+                    <p>Comprehensive testing strategies that satisfy IT requirements while enabling agility</p>
+                </div>
+                <div class="feature">
+                    <h3>Risk Mitigation</h3>
+                    <p>Fixed-price certainty with phased delivery and rollback capabilities</p>
+                </div>
+                <div class="feature">
+                    <h3>Knowledge Transfer</h3>
+                    <p>Detailed documentation and training ensure long-term success</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Relevant Experience -->
+    <div class="slide" data-slide="7">
+        <div class="content">
+            <h1>Relevant Experience</h1>
+            <h2>Similar Engagements Successfully Delivered</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Global Manufacturing Co.</h3>
+                    <p>Modernized inventory dashboard for 5 warehouses, added predictive restocking (85% accuracy improvement)</p>
+                </div>
+                <div class="feature">
+                    <h3>Industrial Parts Distributor</h3>
+                    <p>Implemented automated testing framework, enabling 3x faster release cycles</p>
+                </div>
+                <div class="feature">
+                    <h3>Multi-Site Operations Corp.</h3>
+                    <p>Extended i18n support and UI modernization across 12 global locations</p>
+                </div>
+                <div class="feature">
+                    <h3>Tech Manufacturing Inc.</h3>
+                    <p>Complete system remediation and architecture documentation for IT handover</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Next Steps -->
+    <div class="slide" data-slide="8">
+        <div class="content">
+            <h1>Next Steps</h1>
+            <h2>Let's Move Forward Together</h2>
+            <p>Ready to transform your inventory operations:</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Response Review</h3>
+                    <p>We'll address any questions about our technical approach or timeline</p>
+                </div>
+                <div class="feature">
+                    <h3>Team Introduction</h3>
+                    <p>Meet the engineers who will deliver your solution</p>
+                </div>
+                <div class="feature">
+                    <h3>Contract & Kickoff</h3>
+                    <p>30-day notice to start once selected</p>
+                </div>
+                <div class="feature">
+                    <h3>Success Partnership</h3>
+                    <p>Ongoing support to ensure continued value delivery</p>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; font-size: 1.5rem;"><strong>Contact: [Your Name] | [Your Email] | [Your Phone]</strong></p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button onclick="prevSlide()">Previous</button>
+        <span id="slideCounter">1 / 8</span>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        function showSlide(slideNum) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.style.display = 'none';
+            });
+
+            // Show current slide
+            const currentSlideEl = document.querySelector(`[data-slide="${slideNum}"]`);
+            if (currentSlideEl) {
+                currentSlideEl.style.display = 'flex';
+            }
+
+            // Update counter
+            document.getElementById('slideCounter').textContent = `${slideNum} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(1);
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">c:\Users\giuseppina.z.falco\Downloads\meridian-workshop-main\meridian-workshop-main\proposal\capabilities-deck.html
